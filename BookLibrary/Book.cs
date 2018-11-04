@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Reflection;
 
-namespace BooksLibraryImplementation
+namespace BooksLibrary
 {
     public class Book : IEquatable<Book>, IComparable<Book>, IComparable, IFormattable
     {

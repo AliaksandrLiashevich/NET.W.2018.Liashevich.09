@@ -2,12 +2,11 @@
 using NUnit.Framework;
 using System.Globalization;
 
-namespace BooksLibraryImplementation.Tests
+namespace BooksLibrary.Tests
 {
     [TestFixture]
     public class BooksTests
     {
-        CustomFormatting customProvider = new CustomFormatting();
         IFormatProvider provider = CultureInfo.CreateSpecificCulture("en");
         Book book = new Book("54-5293", "Richter", "C#", "Microsoft Press", 2012, 826, 59.99);
 
@@ -28,7 +27,9 @@ namespace BooksLibraryImplementation.Tests
         
         public void ToString_StringFormatting_FormattedString(string format, string expected)
         {
-            Assert.AreEqual(expected, book.ToString(format, provider));
+            format = "{0:" + format + "}";
+            string result = String.Format(provider, format, book);
+            Assert.AreEqual(expected, result);
         }
 
         [TestCase("X")]
@@ -37,15 +38,15 @@ namespace BooksLibraryImplementation.Tests
 
         public void ToString_InvalidFormatSpecifier_FormatException(string format)
         {
-            Assert.Throws<FormatException>(() => book.ToString(format, provider));
+            format = "{0:" + format + "}";
+            Assert.Throws<FormatException> (() => String.Format(provider, format, book));
         }
     }
 
     [TestFixture]
     public class CustomFormattingTests
     {
-        CustomFormatting customProvider = new CustomFormatting();
-        IFormatProvider provider = CultureInfo.CreateSpecificCulture("en");
+        CustomFormatting customProvider = new CustomFormatting(new CultureInfo("en"));
         Book book = new Book("54-5293", "Richter", "C#", "Microsoft Press", 2012, 826, 59.99);
 
         [TestCase("A", ExpectedResult = "Richter")]
@@ -58,7 +59,8 @@ namespace BooksLibraryImplementation.Tests
 
         public string Format_StringFormatting_FormattedString(string format)
         {
-            return customProvider.Format(format, book, provider);
+            format = "{0:" + format + "}";
+            return String.Format(customProvider, format, book);
         }
     }
 }
