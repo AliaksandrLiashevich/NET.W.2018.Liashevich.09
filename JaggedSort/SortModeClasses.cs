@@ -21,5 +21,4 @@ namespace JaggedArraySorts
             return a < b;
         }
     }
-
 }

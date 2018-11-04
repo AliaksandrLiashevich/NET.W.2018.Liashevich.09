@@ -3,7 +3,6 @@ namespace JaggedArraySorts
 {
     class JaggedSortDToI
     {
-
         public static void Sort(ref int[][] array, Criterion criterion, Mode mode)
         {
             Sort(ref array, (ICriterion)criterion.Target, (IComparer)mode.Target);
