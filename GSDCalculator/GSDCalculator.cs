@@ -25,7 +25,7 @@ namespace GSDSearch
                 }
             }
 
-            return a > b ? a : b;
+            return a + b;
         }
 
         public static int BinaryEuclideanAlgorithm(int a, int b)
@@ -63,7 +63,7 @@ namespace GSDSearch
                 }
             }
 
-            return (a > b ? a : b) * (power >>= 1);
+            return (a + b) * (power >>= 1);
         }
 
         public static int EuclideanAlgorithm(int[] numbers, Stopwatch time)
