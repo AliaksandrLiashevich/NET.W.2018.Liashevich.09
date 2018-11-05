@@ -1,7 +1,6 @@
-﻿
-namespace JaggedArraySorts
+﻿namespace JaggedArraySorts
 {
-    class JaggedSortDToI
+    public class JaggedSortDToI
     {
         public static void Sort(ref int[][] array, Criterion criterion, Mode mode)
         {

@@ -1,14 +1,14 @@
 ﻿using System;
-using NUnit.Framework;
 using System.Globalization;
+using NUnit.Framework;
 
 namespace BooksLibrary.Tests
 {
     [TestFixture]
     public class BooksTests
     {
-        IFormatProvider provider = CultureInfo.CreateSpecificCulture("en");
-        Book book = new Book("54-5293", "Richter", "C#", "Microsoft Press", 2012, 826, 59.99);
+        private IFormatProvider provider = CultureInfo.CreateSpecificCulture("en");
+        private Book book = new Book("54-5293", "Richter", "C#", "Microsoft Press", 2012, 826, 59.99);
 
         [TestCase("AT", "Richter | C#")]
         [TestCase("TY", "C# | 2012")]
@@ -28,7 +28,7 @@ namespace BooksLibrary.Tests
         public void ToString_StringFormatting_FormattedString(string format, string expected)
         {
             format = "{0:" + format + "}";
-            string result = String.Format(provider, format, book);
+            string result = string.Format(provider, format, book);
             Assert.AreEqual(expected, result);
         }
 
@@ -39,15 +39,15 @@ namespace BooksLibrary.Tests
         public void ToString_InvalidFormatSpecifier_FormatException(string format)
         {
             format = "{0:" + format + "}";
-            Assert.Throws<FormatException> (() => String.Format(provider, format, book));
+            Assert.Throws<FormatException>(() => string.Format(provider, format, book));
         }
     }
 
     [TestFixture]
     public class CustomFormattingTests
     {
-        CustomFormatting customProvider = new CustomFormatting(new CultureInfo("en"));
-        Book book = new Book("54-5293", "Richter", "C#", "Microsoft Press", 2012, 826, 59.99);
+        private CustomFormatting customProvider = new CustomFormatting(new CultureInfo("en"));
+        private Book book = new Book("54-5293", "Richter", "C#", "Microsoft Press", 2012, 826, 59.99);
 
         [TestCase("A", ExpectedResult = "Richter")]
         [TestCase("T", ExpectedResult = "C#")]
@@ -60,7 +60,7 @@ namespace BooksLibrary.Tests
         public string Format_StringFormatting_FormattedString(string format)
         {
             format = "{0:" + format + "}";
-            return String.Format(customProvider, format, book);
+            return string.Format(customProvider, format, book);
         }
     }
 }

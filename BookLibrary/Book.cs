@@ -6,18 +6,10 @@ namespace BooksLibrary
 {
     public class Book : IEquatable<Book>, IComparable<Book>, IComparable, IFormattable
     {
-        public string ISBN { private set; get; }
-        public string Author { private set; get; }
-        public string Title { private set; get; }
-        public string PublishingHouse { private set; get; }
-        public int YearOfPublishing { private set; get; }
-        public int NumberOfPages { private set; get; }
-        public double Cost { private set; get; }
-
         /// <summary>
         /// public constructor: initialize fields
         /// </summary>
-        public Book(string isbn, string author, string title, string publishingHouse, 
+        public Book(string isbn, string author, string title, string publishingHouse,
             int yearOfPublishung, int numberOfPages, double cost)
         {
             ISBN = isbn;
@@ -29,6 +21,20 @@ namespace BooksLibrary
             Cost = cost;
         }
 
+        public string ISBN { get;  private set; }
+
+        public string Author { get;  private set; }
+
+        public string Title { get;  private set; }
+
+        public string PublishingHouse { get;  private set; }
+
+        public int YearOfPublishing { get;  private set; }
+
+        public int NumberOfPages { get;  private set; }
+
+        public double Cost { get;  private set; }
+
         /// <summary>
         /// Method of IComparable 'Book' to compare 
         /// objects with type 'Book'
@@ -37,8 +43,10 @@ namespace BooksLibrary
         /// <returns>result of comparison</returns>
         public int CompareTo(Book book)
         {
-            if (Equals(book))
+            if (this.Equals(book))
+            {
                 return 0;
+            }
 
             return Author.CompareTo(book.Author);
         }
@@ -52,7 +60,9 @@ namespace BooksLibrary
         int IComparable.CompareTo(object obj)
         {
             if (!(obj is Book))
+            {
                 throw new InvalidOperationException("CompareTo: Not a Book");
+            }
 
             return CompareTo((Book)obj);
         }
@@ -82,52 +92,59 @@ namespace BooksLibrary
         /// </summary>
         /// <param name="format">Set a way of string formatting</param>
         /// <param name="provider">Set a culture features</param>
-        /// <returns>String representation of object</returns>
+        /// <returns>'string' representation of object</returns>
         public string ToString(string format, IFormatProvider provider)
         {
-            if (String.IsNullOrEmpty(format)) format = "FN";
-            if (provider == null) provider = CultureInfo.CurrentCulture;
+            if (string.IsNullOrEmpty(format))
+            {
+                format = "FN";
+            }
+
+            if (provider == null)
+            {
+                provider = CultureInfo.CurrentCulture;
+            }
 
             switch (format.ToUpper())
             {
                 case "FN":
-                    return String.Format(provider, "{0} | {1} | {2} | {3} | {4} | {5} | {6:C3}", ISBN, Author, Title, 
+                    return string.Format(provider, "{0} | {1} | {2} | {3} | {4} | {5} | {6:C3}", ISBN, Author, Title, 
                         PublishingHouse, YearOfPublishing, NumberOfPages, Cost);
                 case "AT":
-                    return String.Format(provider, "{0} | {1}", Author, Title);
+                    return string.Format(provider, "{0} | {1}", Author, Title);
                 case "TY":
-                    return String.Format(provider, "{0} | {1}", Title, YearOfPublishing);
+                    return string.Format(provider, "{0} | {1}", Title, YearOfPublishing);
                 case "TC":
-                    return String.Format(provider, "{0} | {1:C3}", Title, Cost);
+                    return string.Format(provider, "{0} | {1:C3}", Title, Cost);
                 case "ATP":
-                    return String.Format(provider, "{0} | {1} | {2}", Author, Title, PublishingHouse);
+                    return string.Format(provider, "{0} | {1} | {2}", Author, Title, PublishingHouse);
                 case "TPY":
-                    return String.Format(provider, "{0} | {1} | {2}", Title, PublishingHouse, YearOfPublishing);
+                    return string.Format(provider, "{0} | {1} | {2}", Title, PublishingHouse, YearOfPublishing);
                 case "TYN":
-                    return String.Format(provider, "{0} | {1} | {2}", Title, YearOfPublishing, NumberOfPages);
+                    return string.Format(provider, "{0} | {1} | {2}", Title, YearOfPublishing, NumberOfPages);
                 case "ATPY":
-                    return String.Format(provider, "{0} | {1} | {2} | {3}", Author, Title, PublishingHouse, YearOfPublishing);
+                    return string.Format(provider, "{0} | {1} | {2} | {3}", Author, Title, PublishingHouse, YearOfPublishing);
                 case "ATNC":
-                    return String.Format(provider, "{0} | {1} | {2} | {3:C3}", Author, Title, NumberOfPages, Cost);
+                    return string.Format(provider, "{0} | {1} | {2} | {3:C3}", Author, Title, NumberOfPages, Cost);
                 case "IATP":
-                    return String.Format(provider, "{0} | {1} | {2} | {3}", ISBN, Author, Title, PublishingHouse);
+                    return string.Format(provider, "{0} | {1} | {2} | {3}", ISBN, Author, Title, PublishingHouse);
                 case "ATNPC":
-                    return String.Format(provider, "{0} | {1} | {2} | {3} | {4:C3}", Author, Title, NumberOfPages, PublishingHouse, Cost);
+                    return string.Format(provider, "{0} | {1} | {2} | {3} | {4:C3}", Author, Title, NumberOfPages, PublishingHouse, Cost);
                 case "IATNC":
-                    return String.Format(provider, "{0} | {1} | {2} | {3} | {4:C3}", ISBN, Author, Title, NumberOfPages, Cost);
+                    return string.Format(provider, "{0} | {1} | {2} | {3} | {4:C3}", ISBN, Author, Title, NumberOfPages, Cost);
                 case "ATPYN":
-                    return String.Format(provider, "{0} | {1} | {2} | {3} | {4}", Author, Title, PublishingHouse, YearOfPublishing, 
+                    return string.Format(provider, "{0} | {1} | {2} | {3} | {4}", Author, Title, PublishingHouse, YearOfPublishing, 
                         NumberOfPages);
                 default:     
-                    throw new FormatException(String.Format("The {0} format string is not supported.", format));
+                    throw new FormatException(string.Format("The {0} format string is not supported.", format));
             }
         }
 
         /// <summary>
-        /// Method to compare on equality of interface IEquatable 'Book'
+        /// Method of special interface to compare on equality 
         /// </summary>
         /// <param name="book">object for comparison on equality</param>
-        /// <returns>bool result</returns>
+        /// <returns>true or false logical value</returns>
         public bool Equals(Book book)
         {
             return ISBN.Equals(book.ISBN) & Author.Equals(book.Author) & Title.Equals(book.Title) &
@@ -139,13 +156,15 @@ namespace BooksLibrary
         /// Method to compare on equality
         /// </summary>
         /// <param name="obj">object for comparison on equality</param>
-        /// <returns>result of equality comparison, type bool</returns>
+        /// <returns>true or false logical value</returns>
         public override bool Equals(object obj)
         {
             Book book = obj as Book;
 
             if (book != null)
-                return Equals(book);
+            {
+                return this.Equals(book);
+            }
 
             return false;
         }

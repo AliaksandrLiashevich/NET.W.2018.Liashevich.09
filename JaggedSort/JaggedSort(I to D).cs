@@ -1,10 +1,10 @@
-﻿
-namespace JaggedArraySorts
+﻿namespace JaggedArraySorts
 {
     public delegate bool Mode(int arg1, int arg2);
+
     public delegate int Criterion(int[] array);
 
-    class JaggedSort
+    public class JaggedSortIToD
     {
         public static void Sort(ref int[][] array, ICriterion criterion, IComparer compare)
         {

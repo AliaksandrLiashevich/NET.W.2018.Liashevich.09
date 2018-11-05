@@ -4,18 +4,17 @@
     {
         public static Criterion SumRowValue(int[] array)
         {
-            return new SumRowValue().Calculate;
+            return new SumRowValueSortRule().Calculate;
         }
 
         public static Criterion MinRowValue(int[] array)
         {
-            return new MinRowValue().Calculate;
+            return new MinRowValueSortRule().Calculate;
         }
 
         public static Criterion MaxRowValue(int[] array)
         {
-            return new MaxRowValue().Calculate;
+            return new MaxRowValueSortRule().Calculate;
         }
-
     }
 }

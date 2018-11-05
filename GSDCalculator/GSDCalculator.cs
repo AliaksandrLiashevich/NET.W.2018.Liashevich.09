@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
 
-
 namespace GSDSearch
 {
     internal delegate int GSDDelegate(int a, int b);
 
     public static class GSDCalculator
     {
-        private static GSDDelegate GSDOfArrayNumbers;
+        private static GSDDelegate gsdOfArrayNumbers;
 
         public static int EuclideanAlgorithm(int a, int b)
         {
@@ -16,11 +15,17 @@ namespace GSDSearch
 
             while (a != 0 && b != 0)
             {
-                if (a > b) a %= b;
-                else b %= a;
+                if (a > b)
+                {
+                    a %= b;
+                }
+                else
+                {
+                    b %= a;
+                }
             }
 
-            return a + b;
+            return a > b ? a : b;
         }
 
         public static int BinaryEuclideanAlgorithm(int a, int b)
@@ -47,24 +52,30 @@ namespace GSDSearch
                 }
                 else
                 {
-                    if (a > b) a -= b;
-                    else b -= a;
+                    if (a > b)
+                    {
+                        a -= b;
+                    }
+                    else
+                    {
+                        b -= a;
+                    }
                 }
             }
 
-            return (a + b) * (power >>= 1);
+            return (a > b ? a : b) * (power >>= 1);
         }
 
         public static int EuclideanAlgorithm(int[] numbers, Stopwatch time)
         {
-            GSDOfArrayNumbers = EuclideanAlgorithm;
+            gsdOfArrayNumbers = EuclideanAlgorithm;
 
             return GSDOfSeveralNumbers(numbers, time);
         }
 
         public static int BinaryEuclideanAlgorithm(int[] numbers, Stopwatch time)
         {
-            GSDOfArrayNumbers = BinaryEuclideanAlgorithm;
+            gsdOfArrayNumbers = BinaryEuclideanAlgorithm;
 
             return GSDOfSeveralNumbers(numbers, time);
         }
@@ -72,18 +83,22 @@ namespace GSDSearch
         private static int GSDOfSeveralNumbers(int[] numbers, Stopwatch time)
         {
             if (numbers == null)
+            {
                 throw new ArgumentNullException("Object cannot be null");
+            }
 
             if (numbers.Length == 1)
+            {
                 return numbers[0];
+            }
 
             time.Start();
 
-            int divider = GSDOfArrayNumbers(numbers[0], numbers[1]);
+            int divider = gsdOfArrayNumbers(numbers[0], numbers[1]);
 
             for (int i = 2; i < numbers.Length; i++)
             {
-                divider = GSDOfArrayNumbers(divider, numbers[i]);
+                divider = gsdOfArrayNumbers(divider, numbers[i]);
             }
 
             time.Stop();
