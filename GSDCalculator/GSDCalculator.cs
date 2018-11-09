@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace GSDSearch
+namespace GCDSearch
 {
     internal delegate int GСDDelegate(int a, int b);
 
@@ -116,7 +116,7 @@ namespace GSDSearch
         /// <param name="time">instance of diagnostic class for calculation elapsed time</param>
         /// <returns>Integer number that represents GCD</returns>
         /// <remarks>Used by EuclideanAlgorithm and BinaryEuclideanAlgorithm</ remarks>
-        private static int GSDOfSeveralNumbers(int[] numbers, Stopwatch time)
+        private static int GCDOfSeveralNumbers(int[] numbers, Stopwatch time)
         {
             if (numbers == null)
             {
