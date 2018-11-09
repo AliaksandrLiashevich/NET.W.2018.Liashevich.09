@@ -109,8 +109,7 @@ namespace GCDSearch
         }
 
         /// <summary>
-        /// General method that contains common logics for calculation GCD of integer array.
-        /// Used by EuclideanAlgorithm and BinaryEuclideanAlgorithm
+        /// General method that contains common logics for calculation GCD of integer array
         /// </summary>
         /// <param name="numbers">array of integer numbers</param>
         /// <param name="time">instance of diagnostic class for calculation elapsed time</param>
