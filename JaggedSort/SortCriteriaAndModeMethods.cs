@@ -3,7 +3,7 @@
     /// <summary>
     /// Class for initializing sort criteria and mode delegates
     /// </summary>
-    public static class SortCriteriaMethods
+    public static class SortCriteriaAndModeMethods
     {
         /// <summary>
         /// Sort criteria: sum elements of the row 
